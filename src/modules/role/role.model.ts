@@ -11,7 +11,6 @@ const rolesSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-// Index for faster queries
 rolesSchema.index({ name: 1 });
 
 const Role = mongoose.model('Role', rolesSchema);
