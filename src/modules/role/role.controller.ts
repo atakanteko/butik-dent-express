@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { rolesService } from "./role.service";
+import { roleService } from "./role.service";
 import { HttpStatus } from "../../constants/httpStatus";
 
 const createRole = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const role = await rolesService.createRole(req.body);
+        const role = await roleService.createRole(req.body);
         res.status(HttpStatus.CREATED).json({
             success: true,
             message: 'Role created successfully',
@@ -17,7 +17,7 @@ const createRole = async (req: Request, res: Response, next: NextFunction) => {
 
 const getAllRoles = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const roles = await rolesService.getAllRoles();
+        const roles = await roleService.getAllRoles();
         res.status(HttpStatus.OK).json({
             success: true,
             message: 'Roles retrieved successfully',
@@ -32,7 +32,7 @@ const getAllRoles = async (req: Request, res: Response, next: NextFunction) => {
 const getRoleById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const role = await rolesService.getRoleById(id as string);
+        const role = await roleService.getRoleById(id as string);
         res.status(HttpStatus.OK).json({
             success: true,
             message: 'Role retrieved successfully',
@@ -46,7 +46,7 @@ const getRoleById = async (req: Request, res: Response, next: NextFunction) => {
 const updateRole = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const role = await rolesService.updateRole(id as string, req.body);
+        const role = await roleService.updateRole(id as string, req.body);
         res.status(HttpStatus.OK).json({
             success: true,
             message: 'Role updated successfully',
@@ -60,7 +60,7 @@ const updateRole = async (req: Request, res: Response, next: NextFunction) => {
 const deleteRole = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        await rolesService.deleteRole(id as string);
+        await roleService.deleteRole(id as string);
         res.status(HttpStatus.OK).json({
             success: true,
             message: 'Role deleted successfully'
@@ -70,7 +70,7 @@ const deleteRole = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export const rolesController = {
+export const roleController = {
     createRole,
     getAllRoles,
     getRoleById,

@@ -8,7 +8,7 @@ const rolesSchema = new mongoose.Schema({
         trim: true,
         minlength: [2, 'Role name must be at least 2 characters'],
         maxlength: [50, 'Role name cannot exceed 50 characters']
-    }
+    },
 }, { timestamps: true });
 
 rolesSchema.index({ name: 1 });
