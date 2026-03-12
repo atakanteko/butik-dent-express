@@ -12,7 +12,7 @@ const login = async (data: ILoginBody) => {
         (error as any).status = HttpStatus.NOT_FOUND;
         throw error;
     }
-
+    console.log(data);
     const passwordCorrect = await bcrypty.compare(data.password, user.passwordHash)
 
     if (!passwordCorrect) {
