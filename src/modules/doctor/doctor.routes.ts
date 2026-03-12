@@ -7,5 +7,6 @@ import { authMiddleware } from "../../middlewares/auth.middleware";
 const doctorRouter = Router();
 
 doctorRouter.post('/', authMiddleware, requireRoles(ROLES.ADMIN), doctorController.createDoctor);
+doctorRouter.get('/', authMiddleware, requireRoles(ROLES.ADMIN, ROLES.DOCTOR, ROLES.ASSISTANT), doctorController.getAllDoctors);
 
 export default doctorRouter;
