@@ -1,6 +1,7 @@
 import Role from "./role.model";
 import { ICreateRole, IUpdateRole } from "./role.types";
 import { HttpStatus } from "../../constants/httpStatus";
+import { RoleName } from "../../constants/roles";
 
 const createRole = async (data: ICreateRole) => {
     const existingRole = await Role.findOne({ name: data.name.trim() });
@@ -27,6 +28,17 @@ const getRoleById = async (id: string) => {
     }
     
     const role = await Role.findById(id).select('-__v');
+    if (!role) {
+        const error: Error = new Error('Role not found');
+        (error as any).status = HttpStatus.NOT_FOUND;
+        throw error;
+    }
+    
+    return role;
+};
+
+const getRoleByName = async (name: RoleName) => {
+    const role = await Role.findOne({ name: name.trim() }).select('-__v');
     if (!role) {
         const error: Error = new Error('Role not found');
         (error as any).status = HttpStatus.NOT_FOUND;
@@ -90,5 +102,6 @@ export const roleService = {
     getAllRoles,
     getRoleById,
     updateRole,
-    deleteRole
+    deleteRole,
+    getRoleByName
 };
